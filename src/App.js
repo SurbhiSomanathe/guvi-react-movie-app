@@ -10,6 +10,7 @@ const names = ["KimNamJoon","KimSeokJin","MinYoongi","JungHoseok","ParkJimin","K
 
 const students = [
 ];
+
 const movieList = [
   {
   name: "RRR",
