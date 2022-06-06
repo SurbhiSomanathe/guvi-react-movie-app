@@ -1,6 +1,8 @@
 
 import { useState } from "react";
 import "./App.css";
+import { ColorBox } from "./ColorBox";
+import { Counter } from "./Counter";
 // import { Welcome } from "./Welcome.js";
 function App() {
   // const name = "Divya";
@@ -127,23 +129,6 @@ function AddColor(){
          </div>
   );
 }
-function ColorBox({color}){
-  const styles = {
-backgroundColor: color,
-height: "25px",
-width:"250px",
-marginTop: "10px",
-};
-return <div style={styles}></div>;
-}
-
-
-
-
-
-
-
-
 function Movie({movie}){
 const styles = {
   color: movie.rating > 8 ? "green" : "red",
@@ -176,22 +161,6 @@ const paraStyles = {
 
 
 export default  App;
-// const [state, setState] = useState(InitialValue);
-function Counter() {
-  // let like = 10;
-  const [like, setLike] = useState(0);
-  const [dislike, setDisLike] = useState(0);
-
-  return (
-  <div className="counter-container">
-    <button className="like-button" onClick={() => setLike(like + 1)}>👍 {like}</button>
-    <button className="dislike-button" onClick={() => setDisLike(like + 1)}>👎 {dislike}</button>
-   
-  </div>
-  );
-}
- 
-
 function Welcome(props){
   console.log(props);
   return (
