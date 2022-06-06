@@ -1,10 +1,11 @@
 
 import { useState } from "react";
+import { AddColor } from "./AddColor";
 import "./App.css";
-import { ColorBox } from "./ColorBox";
-import { Counter } from "./Counter";
+import { Movie } from "./Movie";
+import { Welcome } from "./Welcome.1";
 // import { Welcome } from "./Welcome.js";
-function App() {
+export function App() {
   // const name = "Divya";
   // const time = 30;
 
@@ -14,7 +15,7 @@ const names = ["KimNamJoon","KimSeokJin","MinYoongi","JungHoseok","ParkJimin","K
 const students = [
 ];
 
-const movieList = [
+const INITIAL_MOVIE_LIST = [
   {
   name: "RRR",
   poster:
@@ -86,6 +87,10 @@ const movieList = [
   
   }
   ];
+
+
+const [movieList, setMovieList] = useState(INITIAL_MOVIE_LIST);
+
   return (
 <div className="App">
 {/* {students.map((student) => (
@@ -94,103 +99,62 @@ const movieList = [
 
 {/* {names.map((nm)=> 
   (<Welcome name={nm}/>))} */}
-{/* 
-<div className="movie-list">
-  {movieList.map((mv, index) => (<Movie movie={index} movie={mv} />
+
+<MovieList movieList={movieList} setMovieList={setMovieList} />
+
+  {/* <Welcome name = {"Surbhi"} />
+  <AddColor /> */}
+    </div>
+  );
+}
+
+
+export default App;
+
+function MovieList({ movieList, setMovieList }){
+  const [name, setName] = useState("");
+  const [poster, setPoster] = useState("");
+  const [rating, setRating] = useState("");
+  const [summary, setSummary] = useState("");
+  return (
+    <div>
+    <div className="add-movie-form">
+<input
+placeholder="Name" 
+onChange={(event) => setName(event.target.value)} 
+/>
+<input placeholder="Poster" 
+onChange={(event) => setPoster(event.target.value)} 
+/>
+<input placeholder="Rating" 
+onChange={(event) => setRating(event.target.value)}
+/>
+<input placeholder="Summary" 
+onChange={(event) => setSummary(event.target.value)}
+/>
+{/* <p>name: {name}</p>
+<p>poster: {poster}</p>
+<p>rating: {rating}</p>
+<p>summary: {summary}</p> */}
+<button 
+onClick={() =>{
+const newMovie = {
+name: name,
+poster: poster,
+rating: rating,
+summary: summary,
+};
+setMovieList([...movieList, newMovie])
+console.log(newMovie);
+}}
+>
+  Add Movie</button>
+    </div>
+    <div className="movie-list">
+  {movieList.map((mv, index) => (
+  <Movie movie={index} movie={mv} />
   ))}
-  </div> */}
-
-  <Welcome name = {"Surbhi"} />
-  <AddColor />
-    </div>
-  );
+  </div> 
+  </div>
+  )
 }
-
-function AddColor(){
-  const [color, setColor] = useState("deepskyblue");
-  const styles = {
-    backgroundColor: color,
-  };
-
-  const INITIAL_COLOR_LIST = ["deepskyblue", "orange", "purple"];
-
-  const [colorList, setColorList] = useState(INITIAL_COLOR_LIST);
-
-  return(
-    <div>
-      <input value ={color} onChange={(event)=> setColor(event.target.value)} 
-      style={styles} placeholder="Enter a color"/>
-
-<button onClick={() =>setColorList([...colorList, color]) }>AddColor</button>
-
-      {colorList.map((clr, index) => (
-        <ColorBox key={index} color={clr} />
-      ))}
-         </div>
-  );
-}
-function Movie({movie}){
-const styles = {
-  color: movie.rating > 8 ? "green" : "red",
-};
-const [show, setShow] = useState(true);
-
-const paraStyles = {
-  disply: show ? "block" : "none",
-};
-
-  return (
-     <div className="movie-container">
-    <img src={movie.poster} alt={movie.name} className="movie-poster" />
-    <div className="movie-specs">
-<h2 className="movie-name">{movie.name}</h2>
-<p style={styles} className="movie-rating">⭐{movie.rating}</p>
-     </div>
-
-<button onClick={() => setShow(!show)}>Toggle summary</button>
-
-
-<p style={paraStyles} className="movie-summary">
-  {movie.summary}
-</p>
-
-<Counter />
-</div>
-);
-}
-
-
-export default  App;
-function Welcome(props){
-  console.log(props);
-  return (
-    <div>
-          <h1>Hello, 🦋 {props.name} 🦋 </h1>
-    </div>
-  );
-} 
-
-
-function Message({pic,name}){
-  // console.log(props);
-  return (
-    <div>
-    <img className="profile-pic" src={pic} alt={name}/>
-        <h1>Hello, {name} 💜⟭⟬💜</h1>
-        <Counter />
-    </div>
-  );
-} 
-
-
-
-
-// function Message(props){
-//   console.log(props);
-//   return (
-//     <div>
-//     <img className="profile-pic" src={props.pic} alt={props.name}/>
-//         <h1>Hello, {props.name} </h1>
-//     </div>
-//   );
-// } 
