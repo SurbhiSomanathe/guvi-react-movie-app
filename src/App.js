@@ -98,7 +98,7 @@ const movieList = [
   ))}
   </div> */}
 
-  {/* <Welcome name = {"Surbhi"} /> */}
+  <Welcome name = {"Surbhi"} />
   <AddColor />
     </div>
   );
