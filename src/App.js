@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import "./App.css";
+// import { Welcome } from "./Welcome.js";
 function App() {
   // const name = "Divya";
   // const time = 30;
@@ -91,14 +92,56 @@ const movieList = [
 
 {/* {names.map((nm)=> 
   (<Welcome name={nm}/>))} */}
-
+{/* 
 <div className="movie-list">
   {movieList.map((mv, index) => (<Movie movie={index} movie={mv} />
   ))}
-  </div>
+  </div> */}
+
+  {/* <Welcome name = {"Surbhi"} /> */}
+  <AddColor />
     </div>
   );
 }
+
+function AddColor(){
+  const [color, setColor] = useState("deepskyblue");
+  const styles = {
+    backgroundColor: color,
+  };
+
+  const INITIAL_COLOR_LIST = ["deepskyblue", "orange", "purple"];
+
+  const [colorList, setColorList] = useState(INITIAL_COLOR_LIST);
+
+  return(
+    <div>
+      <input value ={color} onChange={(event)=> setColor(event.target.value)} 
+      style={styles} placeholder="Enter a color"/>
+
+<button onClick={() =>setColorList([...colorList, color]) }>AddColor</button>
+
+      {colorList.map((clr, index) => (
+        <ColorBox key={index} color={clr} />
+      ))}
+         </div>
+  );
+}
+function ColorBox({color}){
+  const styles = {
+backgroundColor: color,
+height: "25px",
+width:"250px",
+marginTop: "10px",
+};
+return <div style={styles}></div>;
+}
+
+
+
+
+
+
 
 
 function Movie({movie}){
@@ -153,7 +196,7 @@ function Welcome(props){
   console.log(props);
   return (
     <div>
-          <h1>Hello, 🦋 {props.name}🦋 </h1>
+          <h1>Hello, 🦋 {props.name} 🦋 </h1>
     </div>
   );
 } 
