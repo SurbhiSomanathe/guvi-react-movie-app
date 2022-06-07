@@ -5,6 +5,7 @@ import "./App.css";
 import { Movie } from "./Movie";
 import { Welcome } from "./Welcome.1";
 // import { Welcome } from "./Welcome.js";
+import { Routes, Route, Link, Navigate} from "react-router-dom";
 export function App() {
   // const name = "Divya";
   // const time = 30;
@@ -99,14 +100,51 @@ const [movieList, setMovieList] = useState(INITIAL_MOVIE_LIST);
 
 {/* {names.map((nm)=> 
   (<Welcome name={nm}/>))} */}
+<nav>
+  <ul>
+    <li><Link to="/">Home</Link>
+    </li>
+    <li>
+    <Link to="/color-game">Color Game</Link></li>
+    <li><Link to="/movies">Movie</Link></li>
+  </ul>
+</nav>
 
-<MovieList movieList={movieList} setMovieList={setMovieList} />
+
+<Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/color-game" element={<AddColor />} />
+        <Route path="/movies" element={<MovieList movieList={movieList} setMovieList={setMovieList} />} />
+      
+<Route path="/films" element={<Navigate replace to="/movies" />} />
+
+<Route path="/404" element={<NotFound />}  />
+<Route path="*" element={<Navigate replace to="/404" />}  />
+
+</Routes>
+
 
   {/* <Welcome name = {"Surbhi"} />
   <AddColor /> */}
     </div>
   );
 }
+
+function NotFound() {
+  return(
+     <div> <img src= "https://cdn.dribbble.com/users/1175431/screenshots/6188233/404-error-dribbble-800x600.gif" 
+     alt="404 not found" 
+     className="not-found"
+     />
+  </div>
+  );
+}
+
+
+function Home (){
+  return <h1>Welcome to the movie app</h1>
+}
+
 
 
 export default App;
@@ -116,6 +154,18 @@ function MovieList({ movieList, setMovieList }){
   const [poster, setPoster] = useState("");
   const [rating, setRating] = useState("");
   const [summary, setSummary] = useState("");
+
+const addMovie = () =>{
+  const newMovie = {
+  name: name,
+  poster: poster,
+  rating: rating,
+  summary: summary,
+  };
+  setMovieList([...movieList, newMovie])
+  console.log(newMovie);
+  };
+
   return (
     <div>
     <div className="add-movie-form">
@@ -137,18 +187,7 @@ onChange={(event) => setSummary(event.target.value)}
 <p>rating: {rating}</p>
 <p>summary: {summary}</p> */}
 <button 
-onClick={() =>{
-const newMovie = {
-name: name,
-poster: poster,
-rating: rating,
-summary: summary,
-};
-setMovieList([...movieList, newMovie])
-console.log(newMovie);
-}}
->
-  Add Movie</button>
+onClick={addMovie}>Add Movie</button>
     </div>
     <div className="movie-list">
   {movieList.map((mv, index) => (
