@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Counter } from "./Counter";
 
-export function Movie({ movie }) {
+export function Movie({ movie, id}) {
   const styles = {
     color: movie.rating > 8 ? "green" : "red",
   };
@@ -10,6 +11,8 @@ export function Movie({ movie }) {
   const paraStyles = {
     disply: show ? "block" : "none",
   };
+
+const navigate = useNavigate();
 
   return (
     <div className="movie-container">
@@ -20,11 +23,11 @@ export function Movie({ movie }) {
       </div>
 
       <button onClick={() => setShow(!show)}>Toggle summary</button>
+      <button onClick={() => navigate(`/movies/${id}`)}>Info</button>
 
-
-      <p style={paraStyles} className="movie-summary">
+      {show ? <p className="movie-summary">
         {movie.summary}
-      </p>
+      </p> : null}
 
       <Counter />
     </div>
