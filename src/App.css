@@ -74,3 +74,6 @@ font-size: 18px;
 .movie-detail-container{
   max-width: 900px;
 }
+.route-container{
+  padding: 16px;
+}
