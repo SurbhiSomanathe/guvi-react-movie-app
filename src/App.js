@@ -19,6 +19,11 @@ import { Home } from "./Home";
 import { MovieList } from "./MovieList";
 import { AddMovie } from "./AddMovie";
 import { NotFound } from "./NotFound";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import { borderRadius } from "@mui/system";
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import  Brightness7Icon from '@mui/icons-material/Brightness7';
 
 
 export function App() {
@@ -158,20 +163,27 @@ const INITIAL_MOVIE_LIST = [
 const [movieList, setMovieList] = useState(INITIAL_MOVIE_LIST);
 const navigate = useNavigate();
 
-  return (
-<div className="App">
-{/* {students.map((student) => (
-<Message name={student.name} pic={student.pic}  />
-  ))} */}
 
-{/* {names.map((nm)=> 
-  (<Welcome name={nm}/>))} */}
+const [mode, setMode] = useState("dark");
+const theme = createTheme({
+  palette: {
+    mode: mode,
+  },
+});
+
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Paper elevation={4} style={{ minHeight: "100vh", borderRadius: "0px"}} >
+<div className="App">
       <AppBar position="static">
         <Toolbar>
                   <Button color="inherit" onClick={() => navigate("/")}>Home</Button>
                   <Button color="inherit"onClick={() => navigate("/movies")}>Movies</Button>
                   <Button color="inherit"onClick={() => navigate("/movies/add")}>Add movie</Button>
                   <Button color="inherit" onClick={() => navigate("/color-game")}>Color Game</Button>
+                  <Button color="inherit" startIcon={mode ==="dark" ? <Brightness7Icon /> : <Brightness4Icon />} 
+                  onClick={() => setMode(mode==="light" ? "dark" : "light")}>Light mode</Button>
         </Toolbar>
       </AppBar>
 
@@ -195,11 +207,12 @@ const navigate = useNavigate();
 
 </section>
 
-
-
   {/* <Welcome name = {"Surbhi"} />
   <AddColor /> */}
     </div>
+    </ Paper>
+   </ThemeProvider>
+
   );
 }
 
