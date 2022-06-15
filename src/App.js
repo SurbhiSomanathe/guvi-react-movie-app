@@ -24,6 +24,7 @@ import Paper from '@mui/material/Paper';
 import { borderRadius } from "@mui/system";
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import  Brightness7Icon from '@mui/icons-material/Brightness7';
+import { TicTacToe } from "./TicTacToe";
 
 
 export function App() {
@@ -182,6 +183,7 @@ const theme = createTheme({
                   <Button color="inherit"onClick={() => navigate("/movies")}>Movies</Button>
                   <Button color="inherit"onClick={() => navigate("/movies/add")}>Add movie</Button>
                   <Button color="inherit" onClick={() => navigate("/color-game")}>Color Game</Button>
+                  <Button color="inherit" onClick={() => navigate("/Tic-Tac-Toe")}>Tic-Tac-Toe</Button>
                   <Button color="inherit" startIcon={mode ==="dark" ? <Brightness7Icon /> : <Brightness4Icon />} 
                   onClick={() => setMode(mode==="light" ? "dark" : "light")}>Light mode</Button>
         </Toolbar>
@@ -192,7 +194,7 @@ const theme = createTheme({
 <Routes>     
         <Route path="/" element={<Home />} />
         <Route path="/color-game" element={<AddColor />} />
-        {/* <Route path="/films" element={<Navigate replace to="/movies" />} /> */}
+        <Route path="/Tic-Tac-Toe" element={<TicTacToe />} />
         <Route path="/movies" element={<MovieList movieList={movieList} setMovieList={setMovieList} />
         } 
         />
@@ -217,4 +219,6 @@ const theme = createTheme({
 }
 
 export default App;
+
+
 
